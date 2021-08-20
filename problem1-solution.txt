@@ -1,0 +1,14 @@
+
+def csReverseString(chars):
+    # what we are trying to find
+    reversedString = []
+    
+    indexOfLastItemInCharsArray = len(chars) - 1
+    
+    i = 0
+    while i < len(chars):
+        nextCharacterToAdd = chars[indexOfLastItemInCharsArray - i]
+        reversedString.append(nextCharacterToAdd)
+        i += 1
+    
+    return reversedString

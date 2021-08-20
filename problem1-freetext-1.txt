@@ -1,0 +1,5 @@
+I had trouble assigning to a specific index in a Python array. I wasn't sure if I was doing it wrong, so I used an array method (append) instead.
+
+I thought, a reversed array is the same as reading it backwards. So I accessed the array from back to front, and when I accessed each character, I added it to the newly created reversed array.
+
+I probably could have simplified the logic by setting i to the last characters position, and decreasing it on each loop through. I'm just more used to seeing i increase, and reached for that naturally.
