@@ -1,3 +1,133 @@
+##HASH TABLES NOTES: 
+'hash functions convert strings into indexes, then we store the string into that index in the hash array'
+'HASH FUNCTION + ARRAY = HASH TABLE' 
+'hashing functions operate on the individual characters making up the string'
+'This being said, we can encode strings into their bytes representation with the .encode() method'
+'Once you use .encode, each strings character is now represented by a number'
+        #example: 
+
+            bytes_representation = "hello".encode() #encoding each letter of 'hello' into a number
+
+            for byte in bytes_representation: #byte is one single letter
+                print(byte)
+
+                ### Print Output
+                ### 104 -- H
+                ### 101 -- E
+                ### 108 -- L
+                ### 108 -- L
+                ### 111 -- 0
+
+'Now that we changed each letter into a number, we can manipulate them, using an accumulator pattern to add all the integers together'
+
+        #example:
+            bytes_representation = "hello".encode()
+
+                sum = 0
+                for byte in bytes_representation:
+                    sum += byte #looping through each character and adding each number to the variable sum, then printing the total
+
+                print(sum)
+
+                ### Print Output
+                ### 532 - all the numbers added together
+'Great! Now the string is transformed into one giant number. We can wrap all of the logic of the last two steps, into a function:'
+
+        #example: 
+            def my_hashing_func(str): #wrapped the encoding & adding into the my_hashing_func
+                bytes_representation = str.encode()
+
+                sum = 0
+                for byte in bytes_representation:
+                    sum += byte
+
+                return sum
+
+'As shown earlier, hello returns 532. But, what if our hash table only has ten slots? We have to make 532 a number less than 10, so the value of 532 can be assigned to that index between 1 and 10.'
+'We can do this by using the % modulo operator - this makes sure the summed number that the hashing function returns is within a specific range of numbers'
+
+        #example:
+            def my_hashing_func(str, table_size): #here you can pass in a table size as a parameter to be included in the function
+                bytes_representation = str.encode()
+
+                sum = 0
+                for byte in bytes_representation:
+                    sum += byte
+
+                return sum % table_size # using the table_size here to change the summed integer into a number that fits into our table_size
+
+##HASH TABLE CLASSES
+
+'With hash tables, we can implement a user-defined hashTable class, that uses basic operations (insert, put, delete, get)'
+"We start by defining a hash table as an empty array, and a hash function is a function that takes a value and converts it into an array
+"index that tells you where to store that value (see above).
+
+"So now we can put the hash table(empty array) TOGETHER with the hash function to make a HashTable Class!"
+        "Insert (put) values into a hashtable" -- "Insert a value with an associated key" -- 
+            #example: Let's store instructor with the place they live --> ("Parth", "California")
+        "Retrieve values from a hash table"
+        "Delete values from a hash table"
+
+    
+    ##Here's what our HashTable class looks like: 
+
+        class HashTable:
+            def __init__(self, size = 8):           #capacity of hashtable 
+                self.storage = [None] * size
+             
+            def hash_func(self, string):            #our hash function -- adding up all the encoded numbers
+                sum = 0
+                for char in string:
+                    sum += ord(char)                #we are changing each letter to a 'unicode'  integer, you can also use .encode(), then summing all the numbers
+                return sum % len(self.storage)      #checking the total summed numbers against the amount of storage we have in our table
+
+            def put(self, key, value):
+                # Hash the key
+                index = self.hash_func(key)
+                if (self.storage[index] is not None):
+                    print("OH NO, collision, there's two things at this index")
+                    return
+                # store the value
+                self.storage[index] = (key, value)
+
+            def get(self, key):
+                # Hash the key
+                index = self.hash_func(key)
+                # Retreive the value
+                return self.storage[index][1]
+            
+            def delete(self, key):
+                # Hash the key
+                index = self.hash_func(key)
+                self.storage[index] = None
+            
+            def __setitem__(self, key, value): ## Adding an item to our table
+                self.put(key, value)
+
+            def __getitem__(self, key):        ## Retrieving an item from our table
+                return self.get(key)
+
+        my_dict = HashTable()       ## Setting our HashTable() to our variable Dict. We created our own dictionary of stored info!
+        my_dict['apple'] = 'is a fruit'
+        my_dict['banana'] = 'banana is a fruit'
+        print(my_dict.storage)
+        my_dict['peach'] = 'is not a banana'
+        print(my_dict.storage)
+        print(my_dict['banana'])
+        print(my_dict.hash_func('banana'))
+        print(my_dict.hash_func('peach'))
+
+
+
+
+
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ### 8/23 - HASH TABLES I Assignment Problems
 
 
