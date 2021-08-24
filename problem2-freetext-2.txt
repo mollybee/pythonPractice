@@ -1,5 +1,0 @@
-I think, at a minimum, you would need to make X comparisons, where X is the length of the array, divided by two, and rounded DOWN to the nearest whole number.
-
-I think the second "while loop" solution accomplishes this.
-
-There might be some neat Python tricks where comparing a reversed string, or using SETs or something might be slightly more efficient.

@@ -1,3 +1,0 @@
-I tried the "for loop" approach first, but realized after the halfway point, I'd already "completed" all of the checks I needed -- so the second half of checks were just extra work.
-
-I tried a "while loop" approach next, and used the length of the input string as the while loop condition. This way, I had half as many iterations, and wouldn't have to "check" the middle character for strings with an odd length.

@@ -1,1 +1,0 @@
-It loops the array once per element, so linear? I'm not sure how I could have created a reversed array any faster than that. I could have simplified the logic slightly by decreasing my index, instead of increasing it on each loop.
