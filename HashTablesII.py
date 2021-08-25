@@ -204,8 +204,8 @@ s = 'freeabbb'
 print(frequency_sort(s))
 
 #### HASH TABLES EXAMPLE #######################################################################################
-my_dict = {}
-my_dict = dict()
+my_dict = {} # a dictionary literal
+my_dict = dict() #calling the dictionary method on that list(set of data)
 
 class HashTable:
     def __init__(self, size = 8):
@@ -305,3 +305,30 @@ print(my_dict['banana'])
 # print(my_dict['peach'])
 # print(my_dict.storage)
 # print(my_dict.load_factor())
+
+#########################################################################
+def csAverageOfTopFive(scores):
+    studentScores = {} #our initialized empty dictionary
+    output = []
+    
+    for score in scores: #This for loop is iterating over our entire data structure, it sets new keys if it finds unencountered keys, and if the key is already in the dictionary, then it just keeps adding the values that match up with that key to that list.
+        # if key is not in dict:
+        if score[0] not in studentScores:
+            # insert key into dict, and setting the score to that first encountered value
+            studentScores[score[0]] = [score[1]] # studentScores[score[0]] is the 'key', [score[1]] is the 'value' --> our data structure, for each student and scores. These are the 'parameters'
+        # else if key is in our dict:
+        else:
+            # append our score to the value list of that key
+            studentScores[score[0]].append(score[1])
+    
+    
+    for student, score in studentScores.items(): #.items makes us able to access the data, whereas we cannot in a dictionary, turns data structure back into a list
+        #take the top 5 scores
+        score = sorted(score, reverse=True)[:5] #sorted method is sorting the list, by 'reverse' of ascending (low to high, which is the default) which is descending, and only of the largest 5 numbers (that's what :5)
+        print(score)
+        #average those scores
+        average = sum(score) // len(score) # now that we have all top five scores for each student, we can divide them by the number of scores
+        #find a way to output each student with its average
+        output.append([student, average]) #here we are putting the [student, average] lists in our output variable to return
+    
+    return output
