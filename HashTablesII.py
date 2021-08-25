@@ -14,7 +14,7 @@
 # Output:
 # true
 
-def csIsomorphicStrings(a, b):
+#def csIsomorphicStrings(a, b):
 
 ##############################################################
 ##PROBLEM #2
@@ -29,7 +29,7 @@ def csIsomorphicStrings(a, b):
 
 # Output: true
 
-def csWordPattern(pattern, a):
+#def csWordPattern(pattern, a):
 
 #################################################################
 ##PROBLEM #3
@@ -45,7 +45,7 @@ def csWordPattern(pattern, a):
 # Output:
 # [["apt","pat","tap"],["ear","are"],["arm"]] 
 
-def csGroupAnagrams(strs):
+#def csGroupAnagrams(strs):
 
 
 ###############################################################
@@ -204,8 +204,8 @@ s = 'freeabbb'
 print(frequency_sort(s))
 
 #### HASH TABLES EXAMPLE #######################################################################################
-# my_dict = {}
-# my_dict = dict()
+my_dict = {}
+my_dict = dict()
 
 class HashTable:
     def __init__(self, size = 8):
@@ -300,7 +300,7 @@ my_dict['cucumber'] = 'is green'
 my_dict['plum'] = 'is great!'
 print(len(my_dict.storage))
 print(my_dict.load_factor())
-# print(my_dict['banana'])
+print(my_dict['banana'])
 # print(my_dict['apple'])
 # print(my_dict['peach'])
 # print(my_dict.storage)
