@@ -60,7 +60,7 @@ def search_in_current_spot(array, target, current_spot):
         # So at worst, we're always splitting our search in half
 
 
-def binary_search(arr, target):
+def iterative_binary_search(arr, target):
     #get the middle of the arr
     counter = 0 
     start = 0
@@ -81,11 +81,12 @@ def binary_search(arr, target):
         else:
             # repeat over array from the middle to end
             start = middle_index + 1
+    print(counter)
     return False
 
 our_array = list(range(20))
 print(our_array)
-print(binary_search(our_array, 19)) # searching for the number 19 in our_array
+print(iterative_binary_search(our_array, 19)) # searching for the number 19 in our_array
 
     ###### This whole process is splitting the array 
 
@@ -94,3 +95,33 @@ print(binary_search(our_array, 19)) # searching for the number 19 in our_array
     ## Double the input, only moves the number of steps by the linear amount of 1 --> This is a 'log' runtime (like in math)
 
 ### Logarithmic functions (and constant) are the BEST and most effecient runtime functions
+def binary_search(arr, target):
+    if len(arr) == 0:
+        return False
+    # get the middle of the arr
+    middle_index = len(arr) // 2
+    # compare the value in the middle, to target
+    # If the value == target:
+    if arr[middle_index] == target:
+        return True
+    # if the target is smaller:
+    is_found_in_right = False
+    is_found_in_left = False
+    if arr[middle_index] > target:
+        # repeat over array from start to middle
+        is_found_in_left = binary_search(arr[0: middle_index], target)
+        
+    # if the target is larger:
+    if arr[middle_index] < target:
+        is_found_in_right = binary_search(arr[middle_index + 1:], target)
+    #     repeat over array from middle to end
+    return is_found_in_left or is_found_in_right
+
+our_array = list(range(11))
+print(our_array)
+
+print(binary_search(our_array, 3))
+
+
+
+
