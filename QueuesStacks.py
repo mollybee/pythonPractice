@@ -241,3 +241,67 @@ my_queue.enqueue(1)
 my_queue.enqueue('banana')
 print(f'Removed {my_queue.dequeue()}')
 print(f'Removed {my_queue.dequeue()}')
+
+# //////////////////////////////////////////// codesignal challenge ////////////////////////////////
+
+
+
+def validBracketSequence(sequence):
+#make a Linked List with each of the brackets in one slot
+#make an array 
+
+
+
+
+validBracketSequence("()")
+#output should be : True
+
+
+# Given a string sequence consisting of the characters '(', ')', '[', ']', '{', and '}'. Your task is to determine whether or not the sequence is a valid bracket sequence.
+
+# The Valid bracket sequence is defined in the following way:
+
+# An empty bracket sequence is a valid bracket sequence.
+# If S is a valid bracket sequence then (S), [S] and {S} are also valid.
+# If A and B are valid bracket sequences then AB is also valid.
+
+# For sequence = "()", the output should be validBracketSequence(sequence) = true;
+# For sequence = "()[]{}", the output should be validBracketSequence(sequence) = true;
+# For sequence = "(]", the output should be validBracketSequence(sequence) = false;
+# For sequence = "([)]", the output should be validBracketSequence(sequence) = false;
+# For sequence = "{[]}", the output should be validBracketSequence(sequence) = true.
+
+# Example Input:
+# ({[(]})
+
+# Open brackets so far: ({[(
+# What's next? ]
+# Does not match, most recent open bracket, so it's not valid.
+# For the length of the array of our input
+# If it had been a closing paren )
+# It is valid, and we can throw both of them away
+# So the array of open brackets so far would become: ({[
+# Remaining brackets to check would be: ]})
+
+# for each bracket character in the array of bracket characters...
+# Keep track of unclosed brackets (in an array)
+# 1. if it is an open bracket, add it to the unclosed brackets array
+# 2. if it is a close bracket, compare it to the most recent item in the unclosed brackets array
+#     - If they match, remove the most recent item in the unclosed brackets array
+#     - If they don't match, exit the function, the brackets are not valid
+# end loop
+# if our unclosed brackets array is empty, then we know all open brackets had a closing bracket match
+# we can safely return TRUE, it was a valid bracket string
+
+
+class MyCustomStackClass {
+    this.data = [];
+
+    function push() {
+        
+    }
+
+    function pop() {
+
+    }
+}
