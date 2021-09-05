@@ -155,7 +155,7 @@ class Stack:
         self.storage.append(value)
     
     def pop(self):
-        if len(self.storage) == 0; #if the stack is empty
+        if len(self.storage) == 0: #if the stack is empty
             return
         return self.storage.pop() # if you decided to add items from the end, you need to remove them from the same place (by nature of stacks)
                                     # so you then need to use .pop() to take the off 
@@ -171,3 +171,73 @@ print(f'Popped {my_stack.pop()}')
 print(f'Popped {my_stack.pop()}')
 my_stack.push('banana')
 print(f'Popped {my_stack.pop()}')
+
+
+########################### TWO STACKS EXAMPLE ################################################
+# We have 2 stacks existing in QueueTwoStacks
+# To access data from certain points in the stack, you have to use .pop() every item until you reach the item you want. 
+# What do we do with our items we're popping off along the way? We put them over in the 2nd stack. 
+# Once we get and remove the item we wanted, we then need to shift all the items back into the first stack. 
+
+"""
+Your goal is to define a `Queue` class that uses two stacks. Your `Queue` class
+should have an `enqueue()` method and a `dequeue()` method that ensures a
+"first in first out" (FIFO) order.
+​
+As you write your methods, you should optimize for time on the `enqueue()` and
+`dequeue()` method calls.
+​
+The Stack class that you will use has been provided to you.
+"""
+class Stack:
+    def __init__(self):
+        self.data = []
+        
+    def push(self, item):
+        self.data.append(item)
+​
+    def pop(self):
+        if len(self.data) > 0:
+            return self.data.pop()
+        return "The stack is empty"
+​
+class QueueTwoStacks:
+    def __init__(self):
+        self.in_stack = Stack() #The stack we ADD items into
+        self.out_stack = Stack() #the stack we remove items from before we do any shuffling - the out stack becomes the 'active stack'
+​-
+    def enqueue(self, value): # a constant runtime
+        self.in_stack.push(value)
+​
+    def dequeue(self): #we have to move all items over, and then back. So it's linear 0(n). But we don't actually have to put all of them back to keep dequeuing. 
+        # Check the length of out stack,
+        # if its not empty, pop from out stack
+        if len(self.out_stack.data) > 0:
+            return self.out_stack.pop()
+        # Otherwise, shuffle items from in stack to outstack
+        while len(self.in_stack.data) > 0:
+            # Pop item from in stack
+            # push to out stack
+            popped_item = self.in_stack.pop()
+            self.out_stack.push(popped_item)
+        # pop top item from stack
+        if len(self.out_stack.data) > 0:
+            return self.out_stack.pop()
+​
+​
+my_queue = QueueTwoStacks()
+​
+my_queue.enqueue(1)
+my_queue.enqueue(2)
+my_queue.enqueue(3)
+print(f'Removed {my_queue.dequeue()}')
+​
+my_queue.enqueue(4)
+print(f'Removed {my_queue.dequeue()}')
+print(f'Removed {my_queue.dequeue()}')
+print(f'Removed {my_queue.dequeue()}')
+​
+my_queue.enqueue(1)
+my_queue.enqueue('banana')
+print(f'Removed {my_queue.dequeue()}')
+print(f'Removed {my_queue.dequeue()}')
