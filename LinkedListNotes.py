@@ -189,3 +189,68 @@ my_ll = LinkedList(a) #setting our LinkedList class to this variable, and having
 my_ll.append(2) #adding next item
 my_ll.append(3) #adding next item
 print(my_ll.head.data)
+
+
+
+###########################################################################################
+
+                # CODE-SIGNAL LINKED LIST ASSIGNMENT
+                #Problem 1
+#'You have a singly linked list l, which is sorted in strictly increasing order, and an integer value. Add value to the list l, preserving its original sorting.'
+
+# Singly-linked lists are already defined with this interface:
+# class ListNode(object):
+#   def __init__(self, x):
+#     self.value = x
+#     self.next = None
+#
+def insertValueIntoSortedLinkedList(l, value):
+
+#Attempt:
+
+def insertValueIntoSortedLinkedList(l, value):
+
+    class ListNode:
+        def __init__(self, x):
+            self.value = x
+            self.next = None
+                
+    head = ListNode(value)
+    tail = head
+
+    def add_node_to_next(l, value):
+        new_node = ListNode(value)
+        old_next = l.next #creating the pointer
+        
+        l.next = new_node
+        
+        new_node.next = old_next
+        print(new_node)
+        return new_node
+    
+    def add_node_to_head(current_head, value):
+        new_head = ListNode(value)
+        new_head.next = current_head
+        print(new_head)
+        return new_head
+    
+    #printing our list
+    def print_list(start_node):
+        if not start_node:
+            return print(start_node.value)
+        print_list(start_node.next)
+    
+    #what is this doing?
+    def print_list_iter(start_node):
+        curr_node = start_node
+        while curr_node is not None:
+            print(curr_node.value)
+            curr_node = curr_node.next
+    
+    #return sorted('something') ----- IDK WHAT TO RETURN
+        
+insertValueIntoSortedLinkedList([1, 3, 4, 6], 5)
+#The 'l' variable is taking an array of numbers as the input
+# the 'value' parameter is taking the new value as the input
+
+#The objective is to return the new list with the items sorted ascending
