@@ -149,8 +149,8 @@ def balancedBinaryTree(root):
 class BSTNode:
     def __init__(self, value):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left = None # like the .next from the LL
+        self.right = None # same as the self.left 
 ​
     def insert(self, value):
         if value <= self.value:
@@ -178,3 +178,56 @@ root.insert(7)
 root.insert(12)
 root.insert(11)
 root.insert(13)
+
+# Questions for meeting with Artem: 
+# Could you walk me through a simple binary tree, and what the pieces of code mean? i.e. 'self.left', and how it's used recursively?
+# How is data stored in a 'tree' structure? Are we accessing this tree-shaped data using the Binary Search? I'm struggling to visualize what's happening.
+# In what scenario does it make sense to store/access(?) using a binary search? Most efficient runtime (logarithmic)
+# I've noticed there are variations to writing a binary tree, where we don't have separate Node and Tree classes, why is this?
+# what is the primary differences between a traversal and a binary search tree? Or how are these related?
+# Could we go over one of the binary search tree problems? - 
+
+# Traversal - we're jumping back and forth around between sides - we're still going back to previous functions
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# CODESIGNAL BINARY SEARCH TREES TRAVERSAL PROBLEM - SUCCESSFUL SOLUTION & NOTES
+
+# Binary trees are already defined with this interface:
+
+# class Tree(object): ## root is a single tree node, just like a linked list node
+#   def __init__(self, x):
+#     self.value = x
+#     self.left = None
+#     self.right = None
+
+def binaryTreeInOrderTraversal(root): # root is passing in an instance of the class Tree
+    numArray = [] #all numbers that are smaller go left, larger - right in the binary search
+    #goal is to traverse the tree, get to each individual node, and then move that number into our array
+    # so we'll want to have our array outside the traversal
+    def addNodeToArray(currentNode): #the function that visits all the nodes, this is where we're appending to our array
+       
+        #inOrder Traversal - where we move left first, then come back up to go right
+        if currentNode.left is not None: #adding the left first to the array, but we can change the order
+            addNodeToArray(currentNode.left) #then the same code above runs
+            
+        numArray.append(currentNode.value) #appending our node's value (the number) to our array
+            #adding the 'visiting node' (2) after going left 
+            
+        if currentNode.right is not None:
+            addNodeToArray(currentNode.right)
+        
+    addNodeToArray(root) #the root is what we're passing into the binaryTreeTraversal function    
+    return numArray
+            
+
+
+# Visiting/Processing - done w/ node once we return it, in this specific scenario the processing is the adding the node's value (the number) to our array
+## Breadth - First Traversal - using queues - cannot be recursive 
+# When writing traversals, consider your current Node 
+
+# Need to build the array we'll return - it will come from traversing the tree and moving items to the array
+# return statement will need to be an array 
+# the numbers are being copied to the array, not removed from the tree (mutable/immutable - passing numbers to an array is immutable)
+# removing items from the tree will 'break' the tree - usually don't want to modify the trees
