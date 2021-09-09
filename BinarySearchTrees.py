@@ -4,6 +4,12 @@
 #   n = 2^h - 1
 # If you know the number of nodes (n) in a tree, then you can use this formula to calculate the tree's height:
 #   log_2(n + 1) = h
+# The left subtree of a node contains only nodes with keys lesser than the node’s key.
+# The right subtree of a node contains only nodes with keys greater than the node’s key.
+# A BST is 'balanced' when if the heights of its left and right subtrees differ by at most one, and both of the subtrees are also balanced.
+
+
+
 
 # CREATING A BINARY SEARCH TREE
 
@@ -84,7 +90,7 @@ class BST:
     /  \
    12   3
 
-# Objective: Determine if it is height balanced
+
 # Binary trees are already defined with this interface:
 # class Tree(object):
 #   def __init__(self, x):
@@ -92,3 +98,83 @@ class BST:
 #     self.left = None
 #     self.right = None
 def balancedBinaryTree(root):
+
+
+# Objective: Determine if it is height balanced
+# If it's height balanced, then the left side and the right side should be equal or no different by one node
+# So we'll need to compare the 'left' and the 'right' 
+# We'll need to create a loop where we are both calculating the height of each subtree. 
+# If we loop through the entire tree where there are equal or 1 different in height, then you return true
+# Then comparing them until we get no nodes on one side - in which we return false
+#
+# Step 1. create a binary search tree, instantiating the right and left
+# 
+
+##
+##
+## ~~~~~~~~~~~~~~~ Melanie's solution
+
+
+class Height:
+    def __init__(self):
+        self.height = 0
+
+def height(root):
+    if root is None:
+        return 0
+        
+    return max(height(root.left), height(root.right)) + 1
+
+def balancedBinaryTree(root):
+    if root is None:
+        return True
+
+    left_height = Height()
+    right_height = Height()
+    
+    left_height.height = height(root.left)
+    right_height.height = height(root.right)
+    
+    left = balancedBinaryTree(root.left)
+    right = balancedBinaryTree(root.right)
+    
+    if (left_height.height - right_height.height) <= 1:
+        return True
+    
+    return False
+
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Artem's lecture notes: from 9/8
+# this is using recursive techniques. 
+class BSTNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+​
+    def insert(self, value):
+        if value <= self.value:
+            # the new value, must go left
+            if self.left is None:
+                # create a new node as a left child of current node
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value) # - this is the recursion 
+​
+        else:
+            # the value must go right    
+            if self.right is None:
+                self.right = BSTNode(value)
+            else:
+                # let the right hand Node figure it out
+                self.right.insert(value)
+​
+​
+​
+root = BSTNode(8)
+root.insert(5)
+root.insert(4)
+root.insert(7)
+root.insert(12)
+root.insert(11)
+root.insert(13)
